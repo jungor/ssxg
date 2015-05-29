@@ -1,7 +1,7 @@
 require! ['express']
-Assignment = require '../models/assignment'
-User = require '../models/user'
-Homework = require '../models/homework'
+Club = require '../models/Club'
+User = require '../models/User'
+Activity = require '../models/Activity'
 
 router = express.Router!
 
