@@ -1,0 +1,49 @@
+body {
+    background-color: rgb(235, 235, 235);
+}
+
+
+/*******************************
+           Mainpage
+*******************************/
+
+.mainpage {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.mainpage.bar {
+    height: 50px;
+    margin-top: 45px;
+    background-color: white;
+}
+.insideMainpageBar {
+    position: absolute;
+    width: 400px;
+    left: 110px;
+    top: 50px;
+}
+
+.activityList {
+    margin-top: 2%;
+}
+.cards.ui > .card, .card.ui {
+    width:220px;
+}
+#sum {
+    margin-top: 3%;
+    float: right;
+}
+.menu.pagination.ui {
+    margin-top:  2%;
+    float: right;
+    margin-right: 20px;
+}
+/*******************************
+           ButtonBar
+*******************************/
+
+.segment.teal.inverted.ui {
+    margin-top: 5%;
+    background-color: rgb(9, 108, 210) !important;
+}
