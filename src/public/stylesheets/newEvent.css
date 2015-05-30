@@ -1,0 +1,16 @@
+#button {
+	position: absolute;
+	left:45%;
+}
+#newLeft {
+	overflow: hidden;
+	padding-bottom: 50px;
+}
+#newLeftColumn1 {
+	margin-left: -5%;
+	margin-right: 10%;
+}
+#updateImg {
+	position: absolute;
+	bottom: -138px;
+}
