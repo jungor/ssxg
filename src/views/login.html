@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登陆社社相关</title>
+
+    <link rel="stylesheet" href="../public/stylesheets/base.css">
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/semantic.css">
+
+    <script src="../public/javascripts/jquery-1.11.2.js"></script>
+    <script src="../public/javascripts/semantic.js"></script>
+    <meta http-equiv="content-language" content="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>社社相关</h1>
+    <div class="fr_form-bg">
+        <div class="fr-widget fr-grid fr_content">
+            <h1>登陆</h1>
+            <div class="column">
+                <div class="ui form segment">
+                    <form class="loginForm" method='post' action="/login">
+                        <div class="field">
+                            <label>邮箱</label>
+                            <div class="ui left icon input">
+                                <input type="email" placeholder="" required="required">
+                                <i class="mail icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>密码</label>
+                            <div class="ui left icon input">
+                                <input type="password" required="required">
+                                <i class="lock icon"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="negative ui button fluid" value="登陆">登陆</button>
+                        <div class="ui horizontal divider">
+                            或者
+                        </div>
+                        <div class="center aligned column">
+                            <a href="/signup">
+                                <div class="center green ui labeled icon button">
+                                    <i class="signup icon"></i>
+                                    注册
+                                </div>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
