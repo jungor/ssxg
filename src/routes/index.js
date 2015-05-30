@@ -26,16 +26,17 @@ module.exports = function(passport) {
   /*
   发送注册信息, 成功后跳转到活动浏览页面
   */
-  router.post('/signup', function(req, res) {
-    // body...
-  })
-
+  router.post('/signup',
+    passport.authenticate('signup',{ successRedirect: '/',
+                                    failureRedirect: '/signup',
+                                    failureFlash: true })
+    );
 
   /* 
   获取登录界面
   */
-  router.get('/signin', function(req, res) {
-    // body...
+  router.get('/login', function(req, res) {
+    res.render('login')
   });
 
 
@@ -43,10 +44,15 @@ module.exports = function(passport) {
   发送登录信息，如果是管理员帐号则跳转到社团管理页面
   否则到活动浏览页面
   */
-  router.post('/signin', function(req, res) {
-    // body...
-  })
+  router.post('/login',
+    passport.authenticate('login',{ successRedirect: '/successlogin',
+                                    failureRedirect: '/login',
+                                    failureFlash: true })
+    );
 
+  router.get('/successlogin', isAuthenticated, function(req, res) {
+    req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
+  })
 
   /*
   获取活动浏览页面，也是首页，游客可进
