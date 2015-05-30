@@ -5,7 +5,7 @@ LocalStrategy = passport-local.Strategy
 hash = (password)-> bcrypt-nodejs.hash-sync password, (bcrypt-nodejs.gen-salt-sync 10), null
 
 module.exports = (passport)!-> passport.use 'signup',  new LocalStrategy pass-req-to-callback: true, (req, username, password, done)!->
-  (error, user) <- User.find-one {username: username}
+  (error, user) <- User.find-one {userName: username}
   console.log req.param
   return (console.log "Error in signup: ", error ; done error) if error
 
@@ -14,11 +14,12 @@ module.exports = (passport)!-> passport.use 'signup',  new LocalStrategy pass-re
     done null, false, req.flash 'message', msg
   else
     new-user = new User {
-      username  : username
-      password  : hash password
-      usertype  : req.param 'usertype'
-      firstName : req.param 'firstName'
-      lastName  : req.param 'lastName'
+      userName     : username
+      userPassword : hash password
+      realName     : req.param 'realName'
+      phoneNumber  : req.param 'phoneNumber'
+      email        : req.param 'email'
+      indetity     : 'common_user'
     }
     new-user.save (error)->
       if error
