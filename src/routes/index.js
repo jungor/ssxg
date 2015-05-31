@@ -1,7 +1,7 @@
 var express = require('express');
-var Club = require('../models/Club');
-var User = require('../models/User');
-var Activity = require('../models/Activity');
+var Club = require('../models/club');
+var User = require('../models/user');
+/*var Activity = require('../models/Activity');*/
 
 var router = express.Router();
 
@@ -19,7 +19,7 @@ module.exports = function(passport) {
   获取注册页面
   */ 
   router.get('/signup', function(req, res) {
-    // body...
+    res.render('signup');
   });
 
 
@@ -36,7 +36,7 @@ module.exports = function(passport) {
   获取登录界面
   */
   router.get('/login', function(req, res) {
-    res.render('login')
+    res.render('login');
   });
 
 
@@ -58,7 +58,7 @@ module.exports = function(passport) {
   获取活动浏览页面，也是首页，游客可进
   */
   router.get('/', function(req, res) {
-    // body...
+    req.render('homepage');
   })
 
 
