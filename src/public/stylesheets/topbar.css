@@ -1,6 +1,7 @@
 /*******************************
            TopBar
 *******************************/
+
 .bar.following.fixed {
     position: fixed;
     top: 0px;
@@ -17,35 +18,52 @@
 }
 
 .insideTopBar {
-  position: absolute;
-  top: -32%;
+    position: absolute;
+    top: -32%;
     padding-left: 8%;
     padding-right: 8%;
     width: 100%;
 }
+
 .shape.logo.ui {
     position: absolute;
     margin-top: 16px;
 }
+
 .menu.secondary.floated.right.ui {
     position: absolute;
     top: 18px;
-    right: 150px;
+    right: 15%;
     background-color: rgba(9, 108, 210, 1);
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     color: rgba(255, 255, 255, 0.5);
 }
-.menu.inverted.secondary.ui .item.link, .menu.inverted.secondary.ui a.item {
+
+.menu.inverted.secondary.ui .item.link,
+.menu.inverted.secondary.ui a.item {
     color: rgba(255, 255, 255, 0.9);
 }
+
 .menu.network.secondary.large.ui.bar {
-  position: absolute;
-  left: 13%;
+    position: absolute;
+    left: 13%;
     height: 35px;
 }
+
 .menu.network.secondary.large.ui a.item {
-  color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
+
 #second {
-  right: 230px;
+    position: absolute;
+    top: 18px;
+    background-color: rgba(9, 108, 210, 1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+#topButton {
+  position: absolute;
+  right: 20%;
+  height: 33.8px;
+  width: 150px;
 }
