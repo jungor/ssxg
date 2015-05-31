@@ -20,7 +20,7 @@ body {
 .insideMainpageBar {
     position: absolute;
     width: 400px;
-    left: 110px;
+    left: 12%;
     top: 50px;
 }
 
@@ -44,6 +44,6 @@ body {
 *******************************/
 
 .segment.teal.inverted.ui {
-    margin-top: 5%;
+    margin-top: 10%;
     background-color: rgb(9, 108, 210) !important;
 }
