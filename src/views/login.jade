@@ -1,0 +1,48 @@
+doctype html
+html(prefix='og: http://ogp.me/ns#', lang='en')
+  head
+    meta(charset='UTF-8')
+    title 登陆社社相关
+    link(rel='stylesheet', href='/stylesheets/base.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/semantic.css')
+    script(src='/javascripts/jquery-1.11.2.js')
+    script(src='/javascripts/semantic.js')
+    meta(http-equiv='content-language', content='en')
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    style.
+      body {
+      background-color: #104579;
+      }
+  body
+    .ui.inverted.black.vertical.segment
+      .ui.page.grid
+        .column
+          .bar.ui.large.secondary.network.menu.center
+            a#fontLogo.fontLogo
+              img(src='/images/fontlogo2.png', alt='社社相关', height='50', width='150')
+    .fr_form-bg
+      .fr-widget.fr-grid.fr_content
+        h1 登陆
+        .column
+          .ui.form.segment
+            form.loginForm(method='post', action='/login')
+              .field
+                label 用户名
+                .ui.left.icon.input
+                  input(type='text', required='required', name='username')
+                  i.user.icon
+              .field
+                label 密码
+                .ui.left.icon.input
+                  input(type='password', required='required', name='password')
+                  i.lock.icon
+              button.negative.ui.button.fluid(type='submit', value='登陆') 登陆
+              .ui.horizontal.divider
+                | 或者
+              .center.aligned.column
+                a(href='/signup')
+                  .center.green.ui.labeled.icon.button
+                    i.signup.icon
+                    |  注册

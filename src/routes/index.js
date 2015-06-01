@@ -9,7 +9,7 @@ var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    return res.redirect('/');
+    return res.redirect('/login');
   }
 };
 
@@ -52,14 +52,14 @@ module.exports = function(passport) {
 
   router.get('/successlogin', isAuthenticated, function(req, res) {
     req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
-  })
+  });
 
   /*
   获取活动浏览页面，也是首页，游客可进
   */
   router.get('/', function(req, res) {
-    req.render('homepage');
-  })
+    res.render('homepage');
+  });
 
 
   /*
@@ -67,7 +67,7 @@ module.exports = function(passport) {
   */
   router.get('/activity/:act_id', function(req, res) {
     // body...
-  })
+  });
 
 
   /*
@@ -75,7 +75,7 @@ module.exports = function(passport) {
   */
   router.get('/club', function(req, res) {
     // body...
-  })
+  });
 
 
   /*
@@ -83,7 +83,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id', function(req, res) {
     // body...
-  })
+  });
 
 
   /*
@@ -91,7 +91,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/manage', function(req, res) {
     // body...
-  })
+  });
 
 
   /*
@@ -99,7 +99,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/publish', function(req, res) {
     // body...
-  })
+  });
 
 
   /*
@@ -107,5 +107,7 @@ module.exports = function(passport) {
   */
   router.post('/club/:club_id/publish', function(req, res) {
     // body...
-  })
+  });
+
+  return router;
 };
