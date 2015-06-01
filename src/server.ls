@@ -41,4 +41,4 @@ if (app.get 'env') is 'development' then app.use (err, req, res, next) ->
   }
 
 module.exports = app
-# exports.use = -> app.use.apply app, &
+exports.use = -> app.use.apply app, &

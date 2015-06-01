@@ -6,7 +6,6 @@ hash = (password)-> bcrypt-nodejs.hash-sync password, (bcrypt-nodejs.gen-salt-sy
 
 module.exports = (passport)!-> passport.use 'signup',  new LocalStrategy pass-req-to-callback: true, (req, username, password, done)!->
   (error, user) <- User.find-one {userName: username}
-  console.log req.param
   return (console.log "Error in signup: ", error ; done error) if error
 
   if user

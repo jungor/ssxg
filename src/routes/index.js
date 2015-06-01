@@ -1,5 +1,5 @@
 var express = require('express');
-var Club = require('../models/club');
+/*var Club = require('../models/club');*/
 var User = require('../models/user');
 /*var Activity = require('../models/Activity');*/
 
@@ -18,7 +18,7 @@ module.exports = function(passport) {
   /*
   获取注册页面
   */ 
-  router.get('/signup', function(req, res) {
+  router.get('/signup', function (req, res) {
     res.render('signup');
   });
 
@@ -27,15 +27,14 @@ module.exports = function(passport) {
   发送注册信息, 成功后跳转到活动浏览页面
   */
   router.post('/signup',
-    passport.authenticate('signup',{ successRedirect: '/',
-                                    failureRedirect: '/signup',
-                                    failureFlash: true })
-    );
+    passport.authenticate('signup',{failureRedirect: '/signup'}), function (req, res) {
+      res.redirect('/');
+  });
 
   /* 
   获取登录界面
   */
-  router.get('/login', function(req, res) {
+  router.get('/login', function (req, res) {
     res.render('login');
   });
 
@@ -45,13 +44,8 @@ module.exports = function(passport) {
   否则到活动浏览页面
   */
   router.post('/login',
-    passport.authenticate('login',{ successRedirect: '/successlogin',
-                                    failureRedirect: '/login',
-                                    failureFlash: true })
-    );
-
-  router.get('/successlogin', isAuthenticated, function(req, res) {
-    req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
+    passport.authenticate('login', {failureRedirect: '/signup'}), function (req, res) {
+      req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
   });
 
   /*
