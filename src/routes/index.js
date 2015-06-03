@@ -65,7 +65,7 @@ module.exports = function(passport) {
   获取活动详情页面, 游客可进
   */
   router.get('/activity/:act_id', function(req, res) {
-    // body...
+    res.render('eventDetail');
   });
 
 
@@ -73,7 +73,7 @@ module.exports = function(passport) {
   获取社团浏览页面，游客可进
   */
   router.get('/club', function(req, res) {
-    // body...
+    res.render('homepage');
   });
 
 
