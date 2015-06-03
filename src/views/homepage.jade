@@ -22,20 +22,20 @@ html
             .sides
               .ui.side.active
                 img.ui.image(src='')
-          #topButton(calss='ui right float')
-            #second.ui.left.floated.secondary.menu
-              .inverted.secondary.pointing.ui.menu
-<<<<<<< HEAD
-                a.item(href='./signup') 注册
-            .ui.right.floated.secondary.menu
-              .inverted.secondary.pointing.ui.menu
-                a.item(href='./login') 登录
-=======
-                a.item(href='/signup') 注册
-            .ui.right.floated.secondary.menu
-              .inverted.secondary.pointing.ui.menu
-                a.item(href='/login') 登录
->>>>>>> b1e67bceaeb1de9e018de12fc7581a77fdae8d38
+          if user
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/logout') logout
+
+          else
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/signup') 注册
+              .ui.right.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/login') 登录
           .bar.ui.large.secondary.network.menu.center
             a#fontLogo.center
               img(src='/images/fontlogo.png', alt='社社相关', height='42', width='120')
@@ -53,11 +53,7 @@ html
             .image
               img(src='/images/jenny.jpg')
             .content
-<<<<<<< HEAD
-              a.header(href='./eventDetail') 活动名字
-=======
               a.header(href='/activity/qingxie') 活动名字
->>>>>>> b1e67bceaeb1de9e018de12fc7581a77fdae8d38
               .meta
                 span.date 时间
             .extra.content
@@ -68,11 +64,8 @@ html
             .image
               img(src='/images/jenny.jpg')
             .content
-<<<<<<< HEAD
-              a.header(href='./eventDetail') 活动名字
-=======
               a.header(href='/activity/qingxie') 活动名字
->>>>>>> b1e67bceaeb1de9e018de12fc7581a77fdae8d38
+
               .meta
                 span.date 时间
             .extra.content

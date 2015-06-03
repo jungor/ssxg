@@ -13,6 +13,7 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/topbar.css')
     script(src='/javascripts/jquery-1.11.2.js')
     script(src='/javascripts/semantic.js')
+    script(src='/javascripts/homepage.js')
   body#home
     .following.bar.light.fixed
       .insideTopBar
@@ -21,13 +22,20 @@ html
             .sides
               .ui.side.active
                 img.ui.image(src='')
-          #topButton(calss='ui right float')
-            #second.ui.left.floated.secondary.menu
-              .inverted.secondary.pointing.ui.menu
-                a.item(href='./signup') 注册
-            .ui.right.floated.secondary.menu
-              .inverted.secondary.pointing.ui.menu
-                a.item(href='./login') 登录
+          if user
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/logout') logout
+
+          else
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/signup') 注册
+              .ui.right.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/login') 登录
           .bar.ui.large.secondary.network.menu.center
             a#fontLogo.center
               img(src='/images/fontlogo.png', alt='社社相关', height='42', width='120')
@@ -36,16 +44,16 @@ html
         .insideMainpageBar
           .ui.two.column.center.aligned.stackable.divided.grid
             .column
-              button.ui.button 活动
+              button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button 社团
+              button.ui.button(onclick="window.location='/club'") 社团
       .activityList
         .artList.ui.link.cards
           .ui.card
             .image
               img(src='/images/jenny.jpg')
             .content
-              a.header(href='./eventDetail') 活动名字
+              a.header(href='/activity/qingxie') 活动名字
               .meta
                 span.date 时间
             .extra.content
@@ -56,7 +64,8 @@ html
             .image
               img(src='/images/jenny.jpg')
             .content
-              a.header(href='./eventDetail') 活动名字
+              a.header(href='/activity/qingxie') 活动名字
+
               .meta
                 span.date 时间
             .extra.content

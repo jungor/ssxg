@@ -21,12 +21,20 @@ html
             .sides
               .ui.side.active
                 img.ui.image(src='')
-          #second.ui.right.floated.secondary.menu
-            .inverted.secondary.pointing.ui.menu
-              a.item(href='./signup.html') 注册
-          .ui.right.floated.secondary.menu
-            .inverted.secondary.pointing.ui.menu
-              a.item(href='./login.html') 登录
+          if user
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/logout') logout
+
+          else
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/signup') 注册
+              .ui.right.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/login') 登录
           .bar.ui.large.secondary.network.menu.center
             a#fontLogo.center
               img(src='/images/fontlogo.png', alt='社社相关', height='42', width='120')
@@ -114,7 +122,8 @@ html
                   .text
                     | 好想参加！
                   .actions
-                    a.reply 回复
+                    if user.identity != 'common_user'
+                      a.reply 回复
               .comment
                 a.avatar
                   img(src='/images/avatar/small/elliot.jpg')
@@ -125,30 +134,9 @@ html
                   .text
                     p This has been very useful for my research. Thanks as well!
                   .actions
-                    a.reply 回复
-                .comments
-                  .comment
-                    a.avatar
-                      img(src='/images/avatar/small/jenny.jpg')
-                    .content
-                      a.author 王二麻子
-                      .metadata
-                        span.date 今天 17:42
-                      .text
-                        | Elliot you are always so right :)
-                      .actions
-                        a.reply 回复
-              .comment
-                a.avatar
-                  img(src='/images/avatar/small/joe.jpg')
-                .content
-                  a.author 赵六
-                  .metadata
-                    span.date 刚刚
-                  .text
-                    | Dude, this is awesome. Thanks so much
-                  .actions
-                    a.reply 回复
+                    if user.identity != 'common_user'
+                      a.reply 回复
+
               form.ui.reply.form
                 .field
                   textarea

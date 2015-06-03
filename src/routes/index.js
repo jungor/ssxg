@@ -19,7 +19,9 @@ module.exports = function(passport) {
   获取注册页面
   */ 
   router.get('/signup', function (req, res) {
-    res.render('signup');
+    res.render('signup', {
+      user:req.user
+    });
   });
 
 
@@ -35,7 +37,9 @@ module.exports = function(passport) {
   获取登录界面
   */
   router.get('/login', function (req, res) {
-    res.render('login');
+    res.render('login', {
+      user: req.user
+    });
   });
 
 
@@ -57,7 +61,9 @@ module.exports = function(passport) {
   获取活动浏览页面，也是首页，游客可进
   */
   router.get('/', function(req, res) {
-    res.render('homepage');
+    res.render('homepage', {
+      user: req.user
+    });
   });
 
 
@@ -65,7 +71,9 @@ module.exports = function(passport) {
   获取活动详情页面, 游客可进
   */
   router.get('/activity/:act_id', function(req, res) {
-    res.render('eventDetail');
+    res.render('eventDetail', {
+      user:req.user
+    });
   });
 
 
@@ -73,7 +81,9 @@ module.exports = function(passport) {
   获取社团浏览页面，游客可进
   */
   router.get('/club', function(req, res) {
-    res.render('homepage');
+    res.render('homepage', {
+      user: req.user
+    });
   });
 
 
@@ -107,6 +117,11 @@ module.exports = function(passport) {
   router.post('/club/:club_id/publish', function(req, res) {
     // body...
   });
+
+  router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  })
 
   return router;
 };
