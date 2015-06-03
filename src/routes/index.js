@@ -45,7 +45,12 @@ module.exports = function(passport) {
   */
   router.post('/login',
     passport.authenticate('login', {failureRedirect: '/signup'}), function (req, res) {
-      req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
+      // req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
+      if (req.user.identity === 'common_user') {
+        res.redirect('/')
+      } else {
+        res.redirect('/club/' + req.user.identity + '/manage')
+      }
   });
 
   /*
