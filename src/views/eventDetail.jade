@@ -13,6 +13,7 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/topbar.css')
     script(src='/javascripts/jquery-1.11.2.js')
     script(src='/javascripts/semantic.js')
+    script(src='/javascripts/eventDetail.js')
   body#home
     .following.bar.light.fixed
       .insideTopBar
@@ -43,9 +44,9 @@ html
         .insideMainpageBar
           .ui.two.column.center.aligned.stackable.divided.grid
             .column
-              button.ui.button 活动
+              button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button 社团
+              button.ui.button(onclick="window.location='/'") 社团
       .ui.page.grid.stackable.relaxed.feature.segment
         .row
           .eight.wide.column
@@ -68,7 +69,9 @@ html
               strong 标签： 
               .ui.red.button.mini 公益时
             .ui.inverted.section.divider
-            .ui.white.button.mini 14人报名
+            .ui.white.button.mini
+              span#enrollNum 14
+              span 人报名
             .ui.white.button.mini 65人赞
             .ui.white.button.mini 20条评论
             br
