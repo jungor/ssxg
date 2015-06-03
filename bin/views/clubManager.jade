@@ -22,12 +22,20 @@ html
             .sides
               .ui.side.active
                 img.ui.image(src='')
-          #second.ui.right.floated.secondary.menu
-            .inverted.secondary.pointing.ui.menu
-              a.item(href='./signup.html') 注册
-          .ui.right.floated.secondary.menu
-            .inverted.secondary.pointing.ui.menu
-              a.item(href='./login.html') 登录
+          if user
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/logout') logout
+
+          else
+            #topButton(calss='ui right float')
+              #second.ui.left.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/signup') 注册
+              .ui.right.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item(href='/login') 登录
           .bar.ui.large.secondary.network.menu.center
             a#fontLogo.center
               img(src='/images/fontlogo.png', alt='社社相关', height='42', width='120')
@@ -36,9 +44,9 @@ html
         .insideMainpageBar
           .ui.two.column.center.aligned.stackable.divided.grid
             .column
-              button.ui.button 活动
+              button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button 社团
+              button.ui.button(onclick="window.location='/club'") 社团
       .clubManger
         .ui.grid
           .left.floated.twelve.wide.column
@@ -51,13 +59,13 @@ html
                 .image
                   img(src='/images/jenny.jpg')
                 .content
-                  a.header(href='./clubManager.html') 不想写作业社
+                  a.header(href='#') 不想写作业社
               .ui.section.divider
               .item
-                a(href='./newEvent.html') 发布新活动
+                a(href='/club/admin/publish') 发布新活动
+              //- .item
+              //-   a(href='#') 管理活动
               .item
-                a(href='./manageEvent.html') 管理活动
+                a(href='/club/admin/clubComment') 收到的评论
               .item
-                a(href='./clubComment.html') 收到的评论
-              .item
-                a(href='modifyClubData.html') 完善社团资料
+                a(href='/club/admin/modifyClubData') 完善社团资料

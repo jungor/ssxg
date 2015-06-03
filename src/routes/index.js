@@ -99,7 +99,9 @@ module.exports = function(passport) {
   获取社团管理页面，只有该社团管理员可进
   */
   router.get('/club/:club_id/manage', function(req, res) {
-    // body...
+    res.render('clubManager', {
+      user: req.user
+    });
   });
 
 
@@ -107,7 +109,9 @@ module.exports = function(passport) {
   获取活动发布页面， 只有该社团管理员可进
   */
   router.get('/club/:club_id/publish', function(req, res) {
-    // body...
+    res.render('newEvent', {
+      user: req.user
+    });
   });
 
 
@@ -115,8 +119,22 @@ module.exports = function(passport) {
   发送要发布的活动信息
   */
   router.post('/club/:club_id/publish', function(req, res) {
-    // body...
+
   });
+
+  router.get('/club/admin/clubComment', function(req, res) {
+    res.render('clubComment', {
+      user: req.user
+    });
+  })
+
+  router.get('/club/admin/clubDetail', function(req, res) {
+    res.render('clubDetail', {
+      user: req.user
+    });
+  })
+
+
 
   router.get('/logout', function(req, res) {
     req.logout();
