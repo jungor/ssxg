@@ -1,0 +1,2 @@
+require('./club');
+require('./user');

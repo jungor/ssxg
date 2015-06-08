@@ -24,7 +24,8 @@ var activitySchema = new Schema({
     likedPerson: [personSchema],
     comment: [commentSchema],
     detail_description: String,
-    photos: [String]
+    photos: [String],
+    club_id: String
 });
 
 var clubSchema = new Schema({
@@ -36,3 +37,4 @@ var clubSchema = new Schema({
 });
 
 mongoose.model("Club", clubSchema);
+mongoose.model("Activity", activitySchema);
