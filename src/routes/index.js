@@ -1,9 +1,12 @@
 var express = require('express');
 
 var mongoose = require('mongoose');
-var Club = mongoose.model('Club');
+var Club = require('../models/club.js').club;
+var Activity = require('../models/club.js').activity;
 var User = mongoose.model('User');
-var Activity = mongoose.model('Activity');
+// var Activity = mongoose.model('Activity');
+
+
 
 var router = express.Router();
 
@@ -53,6 +56,9 @@ module.exports = function(passport) {
       // req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
       if (req.user.identity === 'common_user') {
         res.redirect('/')
+      }
+      else if (req.user.identity === 'system_manager') {
+        res.redirect('/admin')
       } else {
         res.redirect('/club/' + req.user.identity + '/manage')
       }
@@ -254,7 +260,6 @@ module.exports = function(passport) {
   router.get('/club/:club_id/newevent', function(req, res) {
     Club.findOne({_id: club_id}, function(err, club) {
       res.render('newEvent', {
-        user: req.user
         user: req.user,
         club_id: club._id,
         name: club.name,
@@ -409,7 +414,7 @@ module.exports = function(passport) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
       if (err) console.log(err);
       else {
-        for (var i = 0; i < club.activity.length) {
+        for (var i = 0; i < club.activity.length; i++) {
           if (club.activity[i]._id == req.params.act_id) {
             club.activity[i].name = req.body.name ? req.body.name : club.activity[i].name;
             club.activity[i].time = req.body.time ? req.body.time : club.activity[i].time;
@@ -486,5 +491,50 @@ module.exports = function(passport) {
     });
   });
 
+  router.get('/admin', function(req, res) {
+    res.render('admin', {
+      user: req.user,
+    })
+  });
+
+  router.post('/createclub', function(req, res) {
+    console.log('hhhh')
+    Club.findOne({'name': req.param('name')}, function(error, club) {
+      if (error) {
+        console.log('error');
+      }
+      if (club) {
+        res.send('Already exists.')
+      } else {
+        var newClub = new Club({
+          name: req.param('name'),
+          description: req.param('discription'),
+          logo: req.body.logo,
+          comment_to_club: [],
+          activity: [],
+        })
+        newClub.save(function(err) {
+          if (err) console.log(err);
+          else {
+            console.log("success!!!");
+          }
+        })
+      }
+    });
+    var newUser = new User({
+      userName: req.param('username'),
+      userPassword: req.param('password'),
+      realName: null,
+      phoneNumber: req.param('phone'),
+      email: req.param('email'),
+      identity: req.param('name'),
+    })
+    newUser.save(function(err) {
+      if (err) console.log(err);
+      else {
+        res.send("success!!!");
+      }
+    });
+  });
   return router;
 };

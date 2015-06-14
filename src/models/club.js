@@ -32,9 +32,9 @@ var clubSchema = new Schema({
     name: String,
     logo: String,
     description: String,
-    comment_to_club: String,
+    comment_to_club: [commentSchema],
     activity: [activitySchema]
 });
 
-mongoose.model("Club", clubSchema);
-mongoose.model("Activity", activitySchema);
+exports.club = mongoose.model("Club", clubSchema);
+exports.activity = mongoose.model("Activity", activitySchema);

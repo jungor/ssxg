@@ -2,11 +2,12 @@ User = require '../models/user'
 require! {'bcrypt-nodejs', 'passport-local'}
 LocalStrategy = passport-local.Strategy
 
-is-valid-password = (user, password)-> bcrypt-nodejs.compare-sync password, user.userPassword
+is-valid-password = (user, password)-> 
+  console.log password
+  bcrypt-nodejs.compare-sync password, user.userPassword
 
 module.exports = (passport)!-> passport.use 'login',  new LocalStrategy pass-req-to-callback: true, (req, username, password, done)!->
   (error, user) <- User.find-one {userName: username}
-  console.log user
   return (console.log "Error in login: ", error ; done error) if error
 
   if not user
