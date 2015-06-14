@@ -201,7 +201,7 @@ module.exports = function(passport) {
       }
       if (err) console.log(err);
       else {
-        res.render('eventDetail', {
+        res.render('clubDetail', {
           user: req.user,
           name: club.name,
           description: club.description,
@@ -229,7 +229,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/clubmanage', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      res.render('clubManager', {
+      res.render('clubManage', {
         user: req.user,
         club_id: club._id,
         name: club.name,
@@ -312,7 +312,10 @@ module.exports = function(passport) {
   router.get('/club/:club_id/clubcomment', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
       res.render('clubComment', {
-        user: req.user
+        user: req.user,
+        club_id: club._id,
+        name: club.name,
+        logo: club.logo
       });
     });
   });
@@ -347,7 +350,7 @@ module.exports = function(passport) {
       }
       if (err) console.log(err);
       else {
-        res.render('specificManageEvent', {
+        res.render('manageEvent', {
           user: req.user,
           name: club.name,
           club_id: club._id,
@@ -455,7 +458,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/modifyclubdata', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      res.render('clubDetail', {
+      res.render('modifyClubDetail', {
         user: req.user,
         club_id: club._id,
         name: club.name,
