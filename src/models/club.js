@@ -32,7 +32,7 @@ var clubSchema = new Schema({
     name: String,
     logo: String,
     description: String,
-    comment_to_club: String,
+    comment_to_club: [commentSchema],
     activity: [activitySchema]
 });
 
