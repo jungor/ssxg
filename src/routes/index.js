@@ -1,5 +1,8 @@
 var express = require('express');
-
+var bcryptNodejs = require('bcrypt-nodejs');
+var hash = function(password){
+  return bcryptNodejs.hashSync(password, bcryptNodejs.genSaltSync(10), null);
+};
 var mongoose = require('mongoose');
 var Club = require('../models/club.js').club;
 var Activity = require('../models/club.js').activity;
@@ -60,7 +63,7 @@ module.exports = function(passport) {
       else if (req.user.identity === 'system_manager') {
         res.redirect('/admin')
       } else {
-        res.redirect('/club/' + req.user.identity + '/manage')
+        res.redirect('/club/' + req.user.identity + '/clubmanage')
       }
   });
 
@@ -258,7 +261,7 @@ module.exports = function(passport) {
   3.该社团的_id, 名字, logo
   */
   router.get('/club/:club_id/newevent', function(req, res) {
-    Club.findOne({_id: club_id}, function(err, club) {
+    Club.findOne({_id: req.params.club_id}, function(err, club) {
       res.render('newEvent', {
         user: req.user,
         club_id: club._id,
@@ -288,15 +291,15 @@ module.exports = function(passport) {
       detal_discription: req.body.detal_discription,
       club_id: req.params.club_id
     });
-    Club.findOne({_id: club_id}, function(err, club) {
+    activity.save(function(err) {
+      if (err) console.log(err);
+    });
+    Club.findOne({_id: req.params.club_id}, function(err, club) {
       club.activity.push(activity);
       club.save(function(err) {
         if (err) console.log(err);
-        else res.send("success!");
+        else res.redirect('/club/'+req.params.club_id+'/clubmanage')
       });
-    });
-    activity.save(function(err) {
-      if (err) console.log(err);
     });
   });
 
@@ -463,7 +466,7 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/modifyclubdata', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      res.render('modifyClubDetail', {
+      res.render('modifyClubData', {
         user: req.user,
         club_id: club._id,
         name: club.name,
@@ -501,10 +504,11 @@ module.exports = function(passport) {
   });
 
   router.post('/createclub', function(req, res) {
-    console.log('hhhh')
+    console.log(req.body)
     Club.findOne({'name': req.param('name')}, function(error, club) {
       if (error) {
         console.log('error');
+        return res.send('System error.')
       }
       if (club) {
         res.send('Already exists.')
@@ -522,20 +526,20 @@ module.exports = function(passport) {
             console.log("success!!!");
           }
         })
-      }
-    });
-    var newUser = new User({
-      userName: req.param('username'),
-      userPassword: req.param('password'),
-      realName: null,
-      phoneNumber: req.param('phone'),
-      email: req.param('email'),
-      identity: req.param('name'),
-    })
-    newUser.save(function(err) {
-      if (err) console.log(err);
-      else {
-        res.send("success!!!");
+        var newUser = new User({
+          userName: req.param('username'),
+          userPassword: hash(req.param('password')),
+          realName: null,
+          phoneNumber: req.param('phone'),
+          email: req.param('email'),
+          identity: newClub._id,
+        })
+        newUser.save(function(err) {
+          if (err) console.log(err);
+          else {
+            res.send("success!!!");
+          }
+        });
       }
     });
   });

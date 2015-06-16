@@ -65,7 +65,7 @@ html
                   #form_content.fr-widget.fr-grid.fr_content
                     #newLeftColumn1.column
                       .ui.form.segment
-                        form.loginForm(action='/login', method='post')
+                        form.loginForm(action='/club/#{club_id}/newevent', method='post', enctype="multipart/form-data")
                           .field
                             label 活动名称
                             .ui.left.icon.input
@@ -86,17 +86,13 @@ html
                             label 标签
                             .ui.left.icon.input
                               input(required='required', type='text', name='newEventTag')
-                //- .row
-                //-   .ui.inverted.section.divider
-                //-   h4.ui.header
-                //-     | 具体描述
-                //-   textarea(rows='10', columns='10')
-                .ui.inverted.section.divider
-                .row
-                  #button.ui.basic.animated.button.button
-                    .visible.content 发布活动
-                    .hidden.content
-                      i.right.arrow.icon
+                          .ui.inverted.section.divider
+                          .row
+                            #button.ui.basic.animated.button.button
+                              .visible.content 发布活动
+                              .hidden.content
+                                i.right.arrow.icon
+                                input(type='submit', value='发布活动')
           .right.floated.four.wide.column
             .ui.animated.selection.list
               .ui.fluid.card

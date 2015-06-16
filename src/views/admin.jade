@@ -61,7 +61,7 @@ html
                   #form_content.fr-widget.fr-grid.fr_content
                     #newLeftColumn1.column
                       .ui.form.segment
-                        form.createclubForm(action='/createclub', method='post')
+                        form.createclubForm(action='/createclub', method='post', enctype="multipart/form-data")
                           .field
                             label 社团名称
                             .ui.left.icon.input
