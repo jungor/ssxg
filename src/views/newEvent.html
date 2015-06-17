@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../public/stylesheets/newEvent.css">
     <script src="../public/javascripts/jquery-1.11.2.js"></script>
     <script src="../public/javascripts/semantic.js"></script>
+    <script src="../public/javascripts/newEvent.js"></script>
 </head>
 
 <body id="home">
@@ -76,44 +77,53 @@
                             <div class="right floated six wide column">
                                 <p>上传图片</p>
                                 <img class="ui massive bordered image" src="">
-                                <input type="file" name="uploadFile" /id="updateImg">
+                                <form class="loginForm" action="/login" method="post" id = "newEvent">
+                                    <input type="file" name="uploadFile" /id="updateImg">
+                                    <input required="required" type="text" name="newEventName" id="newEventName" hidden>
+                                    <input required="required" type="date" name="newEventTime" id="newEventTime" hidden>
+                                    <input required="required" type="text" name="newEventPlace" id="newEventPlace" hidden>
+                                    <input required="required" type="text" name="newEventType" id="newEventType" hidden>
+                                    <input required="required" type="text" name="newEventTag" id="newEventTag" hidden>
+                                    <input type="text" name="newEventSummary" /id="newEventSummary" hidden>
+                                </form>
                             </div>
                             <div class="ten wide column">
                                 <div class="fr-widget fr-grid fr_content" id="form_content">
                                     <div class="column" id="newLeftColumn1">
                                         <div class="ui form segment">
-                                            <form class="loginForm" action="/login" method="post">
+                                            <div class="loginForm" action="/login" method="post">
                                                 <div class="field">
                                                     <label>活动名称</label>
                                                     <div class="ui left icon input">
-                                                        <input required="required" type="text" name="newEventName">
+                                                        <input required="required" type="text" id="eventName">
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label>活动时间</label>
                                                     <div class="ui left icon input">
-                                                        <input required="required" type="text" name="newEventTime">
+                                                        <input required="required" type="date" id="eventTime">
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label>活动地点</label>
                                                     <div class="ui left icon input">
-                                                        <input required="required" type="text" name="newEventPlace">
+                                                        <input required="required" type="text" id="eventPlace">
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label>类型</label>
                                                     <div class="ui left icon input">
-                                                        <input required="required" type="text" name="newEventType">
+                                                        <input required="required" type="text" id="eventType">
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label>标签</label>
                                                     <div class="ui left icon input">
-                                                        <input required="required" type="text" name="newEventTag">
+                                                        <input required="required" type="text" id="eventTag">
                                                     </div>
                                                 </div>
-                                            </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
