@@ -504,11 +504,12 @@ module.exports = function(passport) {
   });
 
   router.post('/createclub', function(req, res) {
-    console.log(req.body)
+    console.log(req.files['logo']);
     Club.findOne({'name': req.param('name')}, function(error, club) {
       if (error) {
-        console.log('error');
-        return res.send('System error.')
+        var message = 'Database error.'
+        console.log(message);
+        return res.send(message);
       }
       if (club) {
         res.send('Already exists.')
@@ -516,7 +517,7 @@ module.exports = function(passport) {
         var newClub = new Club({
           name: req.param('name'),
           description: req.param('discription'),
-          logo: req.body.logo,
+          logo: '/'+req.files['logo'].path.split('/').slice(2).join('/'),
           comment_to_club: [],
           activity: [],
         })
@@ -529,7 +530,7 @@ module.exports = function(passport) {
         var newUser = new User({
           userName: req.param('username'),
           userPassword: hash(req.param('password')),
-          realName: null,
+          realName: 'Manager of '+req.param('name'),
           phoneNumber: req.param('phone'),
           email: req.param('email'),
           identity: newClub._id,

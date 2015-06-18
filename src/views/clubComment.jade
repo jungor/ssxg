@@ -99,8 +99,10 @@ html
                   a.header(href='./clubManager.html') 不想写作业社
               .ui.section.divider
               .item
-                a(href='./newEvent.html') 发布新活动
+                a(href='/club/#{club_id}/newevent') 发布新活动
+              //- .item
+              //-   a(href='#') 管理活动
               .item
-                a(href='./manageEvent.html') 管理活动
+                a(href='/club/#{club_id}/clubComment') 收到的评论
               .item
-                a(href='modifyClubData.html') 完善社团资料
+                a(href='/club/#{club_id}/modifyClubData') 完善社团资料

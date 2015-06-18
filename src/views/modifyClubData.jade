@@ -61,13 +61,13 @@ html
                   .center.aligned.column
                     h4.ui.header
                       | 现有社团Logo
-                      img.ui.massive.bordered.image(src='')
+                      img.ui.massive.bordered.image(src='#{logo}')
                   .ui.vertical.divider
                     | Or
                   .right.floated.center.aligned.column
                     h4.ui.header
                       | 重新上传
-                      input#updateImg(type='file', name='uploadFile')
+                      input#updateImg(type='file', name='logo')
               .row
                 .ui.inverted.section.divider
                 h4.ui.header
@@ -90,8 +90,10 @@ html
                   a.header(href='./clubManager.html') 不想写作业社
               .ui.section.divider
               .item
-                a(href='./newEvent.html') 发布新活动
+                a(href='/club/#{club_id}/newevent') 发布新活动
+              //- .item
+              //-   a(href='#') 管理活动
               .item
-                a(href='./manageEvent.html') 管理活动
+                a(href='/club/#{club_id}/clubComment') 收到的评论
               .item
-                a(href='./clubComment.html') 收到的评论
+                a(href='/club/#{club_id}/modifyClubData') 完善社团资料
