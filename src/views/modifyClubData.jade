@@ -70,17 +70,16 @@ html
                       input#updateImg(type='file', name='logo')
               .row
                 .ui.inverted.section.divider
-                h4.ui.header
+                h3.ui.header
                   | 社团描述
-                  .ui.two.column.middle.aligned.relaxed.fitted.stackable.grid
-                    .field
-                      textarea(cols='70', rows='20')
+                .ui.two.column.middle.aligned.relaxed.fitted.stackable.grid
+                  .field
+                    textarea(cols='70', rows='20')
               .ui.inverted.section.divider
               .row
                 #button.ui.basic.animated.button.button
                   .visible.content 确认修改
-                  .hidden.content
-                    i.right.arrow.icon
+                  .hidden.content ->
           .right.floated.four.wide.column
             .ui.animated.selection.list
               .ui.fluid.card

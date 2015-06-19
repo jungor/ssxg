@@ -21,14 +21,16 @@ body {
     position: absolute;
     width: 400px;
     left: 12%;
-    top: 50px;
+    top: 52px;
 }
 
 .activityList {
     margin-top: 2%;
+    margin-left: 2%;
 }
 .cards.ui > .card, .card.ui {
-    width:220px;
+    width:17%;
+    margin-right: 2%;
 }
 #sum {
     margin-top: 3%;
