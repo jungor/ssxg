@@ -26,8 +26,10 @@ module.exports = function(passport) {
   /*
   获取注册页面
   */ 
+ //添加注册错误提示
   router.get('/signup', function (req, res) {
     res.render('signup', {
+      message: req.flash('message')
     });
   });
 
@@ -43,9 +45,11 @@ module.exports = function(passport) {
   /* 
   获取登录界面
   */
+ //显示错误信息
   router.get('/login', function (req, res) {
     res.render('login', {
-      user: req.user
+      user: req.user,
+      message: req.flash('message')
     });
   });
 
@@ -54,8 +58,9 @@ module.exports = function(passport) {
   发送登录信息，如果是管理员帐号则跳转到社团管理页面
   否则到活动浏览页面
   */
+ //登陆错误，显示错误信息，回到登陆界面
   router.post('/login',
-    passport.authenticate('login', {failureRedirect: '/signup'}), function (req, res) {
+    passport.authenticate('login', {failureRedirect: '/login'}), function (req, res) {
       // req.user.identity === 'common_user' ? res.redirect('/') : res.redirect('/club/' + req.user.identity + '/manage');
       if (req.user.identity === 'common_user') {
         res.redirect('/')

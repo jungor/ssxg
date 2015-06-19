@@ -11,10 +11,10 @@ module.exports = (passport)!-> passport.use 'login',  new LocalStrategy pass-req
   return (console.log "Error in login: ", error ; done error) if error
 
   if not user
-    console.log msg = "Can't find user: #{username}"
+    console.log msg = "无用户名 #{username} ！"
     done null, false, req.flash 'message', msg
   else if not is-valid-password user, password
-    console.log msg = "Invalid password"
+    console.log msg = "密码错误！"
     done null, false, req.flash 'message', msg
   else
     console.log msg = "Login success"

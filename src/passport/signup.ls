@@ -9,7 +9,7 @@ module.exports = (passport)!-> passport.use 'signup',  new LocalStrategy pass-re
   return (console.log "Error in signup: ", error ; done error) if error
 
   if user
-    console.log msg = "User: #{username} already exists"
+    console.log msg = "用户  #{username}  已经存在！"
     done null, false, req.flash 'message', msg
   else
     new-user = new User {

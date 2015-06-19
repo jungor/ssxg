@@ -15,6 +15,9 @@ html(prefix='og: http://ogp.me/ns#', lang='en')
       body {
       background-color: #104579;
       }
+      .text-success {
+      color: red;
+      }
   body
     .ui.inverted.black.vertical.segment
       .ui.page.grid
@@ -38,6 +41,7 @@ html(prefix='og: http://ogp.me/ns#', lang='en')
                 .ui.left.icon.input
                   input(type='password', required='required', name='password')
                   i.lock.icon
+              p.ui.inverted.text-success #{message}
               button.negative.ui.button.fluid(type='submit', value='登陆') 登陆
               .ui.horizontal.divider
                 | 或者
