@@ -14,6 +14,7 @@ html
     script(src='/javascripts/jquery-1.11.2.js')
     script(src='/javascripts/semantic.js')
     script(src='/javascripts/homepage.js')
+    
   body#home
     .following.bar.light.fixed
       .insideTopBar
@@ -24,9 +25,13 @@ html
                 img.ui.image(src='')
           if user
             #topButton(calss='ui right float')
-              #second.ui.left.floated.secondary.menu
+              #second.ui.left.floated
                 .inverted.secondary.pointing.ui.menu
-                  a.item(href='/logout') logout
+                  a.item(href='#') 欢迎你&nbsp&nbsp #{user.userName}&nbsp&nbsp&nbsp&nbsp&nbsp
+
+              .ui.right.floated.secondary.menu
+                .inverted.secondary.pointing.ui.menu
+                  a.item.success(href='/logout') 登出
 
           else
             #topButton(calss='ui right float')
