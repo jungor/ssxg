@@ -45,9 +45,9 @@ html
         .insideMainpageBar
           .ui.two.column.center.aligned.stackable.divided.grid
             .column
-              button.ui.button 活动
+              button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button 社团
+              button.ui.button(onclick="window.location='/club'") 社团
       .clubManger
         .ui.grid
           .left.floated.twelve.wide.column
@@ -84,9 +84,9 @@ html
             .ui.animated.selection.list
               .ui.fluid.card
                 .image
-                  img(src='/images/jenny.jpg')
+                  img(src="#{logo}")
                 .content
-                  a.header(href='./clubManager.html') 不想写作业社
+                  a.header(href="/club/#{club_id}") #{name}
               .ui.section.divider
               .item
                 a(href='/club/#{club_id}/newevent') 发布新活动

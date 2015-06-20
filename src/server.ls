@@ -14,10 +14,11 @@ app.use (favicon "#{__dirname}/public/images/favicon.png")
 app.use logger 'dev'
 app.use bodyParser.json!
 app.use (bodyParser.urlencoded extended: false)
-app.use (multer dest: './bin/public/uploads/', rename: (fieldname, filename)-> (filename.replace(/\W+/g, '-') .toLowerCase!) + Date.now!)
+app.use (multer dest: './uploads/', rename: (fieldname, filename)-> (filename.replace(/\W+/g, '-') .toLowerCase!) + Date.now!)
 app.use cookieParser!
 app.use (methodOverride '_method')
 app.use express.static path.join __dirname, 'public'
+app.use express.static path.join __dirname, '../uploads'
 app.use expressSession {secret: 'mySecretKey', resave: true, saveUninitialized: false}
 app.use passport.initialize!
 app.use passport.session!

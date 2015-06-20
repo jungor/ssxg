@@ -46,28 +46,28 @@ html
             .column
               button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button(onclick="window.location='/'") 社团
+              button.ui.button(onclick="window.location='/club'") 社团
       .ui.page.grid.stackable.relaxed.feature.segment
         .row
           .eight.wide.column
-            img.ui.medium.rounded.image.bordered(src='/images/jenny.jpg')
+            img.ui.medium.rounded.image.bordered(src="#{logo}")
           .eight.wide.column
-            h2.ui.header 中山大学暑假招宣活动
+            h2.ui.header #{name}
             .eventInfo
               strong 时间： 
-              | 6月15日14：00
+              | #{time}
             .eventInfo
               strong 地点： 
-              | 广州市第一中学
+              | #{location}
             .eventInfo
               strong 类型： 
-              | 公益类
+              | #{type}
             .eventInfo
               strong 主办方： 
-              | 青年志愿者协会
+              | #{club_name}
             .eventInfo
               strong 标签： 
-              .ui.red.button.mini 公益时
+              .ui.red.button.mini #{tag}
             .ui.inverted.section.divider
             .ui.white.button.mini
               span#enrollNum 14
@@ -125,7 +125,7 @@ html
                   .text
                     | 好想参加！
                   .actions
-                    if user.identity != 'common_user'
+                    if user && user.identity != 'common_user'
                       a.reply 回复
               .comment
                 a.avatar
@@ -137,7 +137,7 @@ html
                   .text
                     p This has been very useful for my research. Thanks as well!
                   .actions
-                    if user.identity != 'common_user'
+                    if user && user.identity != 'common_user'
                       a.reply 回复
 
               form.ui.reply.form

@@ -24,7 +24,7 @@ var activitySchema = new Schema({
     likedPerson: [personSchema],
     comment: [commentSchema],
     detail_description: String,
-    photos: [String],
+    logo: String,
     club_id: String
 });
 

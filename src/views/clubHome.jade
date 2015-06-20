@@ -59,14 +59,12 @@ html
               .image
                 img(src="#{item['logo']}")
               .content
-                a.header(href="/activity/#{item['_id']}") #{item['name']}
-                .meta
-                  span.date #{item['time']}
+                a.header(href="/club/#{item['_id']}") #{item['name']}
               .extra.content
                 a
-                  i.thumbs.up.icon
-                  span 点赞 
-                  span 10
+                  i#1thumbs.thumbs.up.icon
+                  span#1text 点赞 
+                  span#1sum 10
       #sum.page
         | Showing 
         b 6

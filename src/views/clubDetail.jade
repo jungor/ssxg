@@ -44,45 +44,36 @@ html
         .insideMainpageBar
           .ui.two.column.center.aligned.stackable.divided.grid
             .column
-              button.ui.button 活动
+              button.ui.button(onclick="window.location='/'") 活动
             .column
-              button.ui.button 社团
+              button.ui.button(onclick="window.location='/club'") 社团
       .clubManger
         .ui.grid
           .left.floated.twelve.wide.column
             .ui.piled.segment
-              h2 不想学习社
-              p 这是一个让人不想学习的社团
+              h2 #{club['name']}
+              p #{club['description']}
             .ui.stacked.segment
               h4.ui.header
                 | 活动列表
                 .artList.ui.link.cards
-                  .ui.card
-                    .image
-                      img(src='/images/jenny.jpg')
-                    .content
-                      a.header(href='./eventDetail.html') 活动名字
-                      .meta
-                        span.date 时间
-                    .extra.content
-                      a
-                        i.thumbs.outline.up.icon
-                        |           没点赞//显示数字
-                  .ui.card
-                    .image
-                      img(src='/images/jenny.jpg')
-                    .content
-                      a.header(href='./eventDetail.html') 活动名字
-                      .meta
-                        span.date 时间
-                    .extra.content
-                      a
-                        i.thumbs.up.icon
-                        |           点了赞//显示数字
+                  each item in club['activity']
+                    .ui.card
+                      .image
+                        img(src="#{item['logo']}")
+                      .content
+                        a.header(href="/activity/#{item['_id']}") #{item['name']}
+                        .meta
+                          span.date #{item['time']}
+                      .extra.content
+                        a
+                          i.thumbs.up.icon
+                          span 点赞 
+                          span 10
           .right.floated.four.wide.column
             .ui.animated.selection.list
               .ui.fluid.card
                 .image
-                  img(src='/images/jenny.jpg')
+                  img(src="#{club['logo']}")
                 .content
-                  a.header(href='./clubDetail.html') 不想写作业社
+                  a.header(href="/club/#{club['_id']}") #{club['name']}

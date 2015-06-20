@@ -90,27 +90,20 @@ module.exports = function(passport) {
   */
   router.get('/', function(req, res) {
     Activity.find({}, function(err, activities) {
+      var all_activities = [];
+      for (var i = 0; i < activities.length; i++) {
+        var activity_info = {};
+        activity_info['_id'] = activities[i]._id;
+        activity_info['name'] = activities[i].name;
+        activity_info['logo'] = activities[i].logo;
+        activity_info['time'] = activities[i].time.toString();
+        all_activities.push(activity_info);
+      }
       if (err) console.log(err);
       else {
-        var ids = new Array();
-        var names = new Array();
-        var photos = new Array();
-        var times = new Array();
-        var likedNumber = new Array();
-        for (var i = 0; i < activities.length; i++) {
-          ids.push(activities[i]._id);
-          names.push(activities[i].name);
-          photos.push(activities[i].photos[0]);
-          times.push(activities[i].time);
-          likedNumber.push(activities[i].likedPerson.length);
-        }
         res.render('homepage', {
-          user: req.user,
-          ids: ids,
-          names: names,
-          photos: photos,
-          times: times,
-          likedNumber: likedNumber
+          user:req.user,
+          content_list:all_activities
         });
       }
     });
@@ -135,20 +128,22 @@ module.exports = function(passport) {
     Activity.findOne({_id: req.params.act_id}, function(err, activity) {
       if (err) console.log(err);
       else {
-        res.render('eventDetail', {
-          user: req.user,
-          name: activity.name,
-          time: activity.time,
-          location: activity.location,
-          type: activity.type,
-          sponsor: activity.sponsor,
-          club_id: activity.club_id,
-          tag: activity.tag,
-          joinedPersonNumber: activity.joinedPerson.length,
-          likedNumber: activity.likedPerson.length,
-          detal_discription: activity.detal_discription,
-          comments: activity.comment // 这是一个数组
-        });
+        Club.findOne({_id: activity.club_id}, function(err, club) {
+          if (err) console.log(err);
+          else {
+            res.render('eventDetail', {
+              user: req.user,
+              name: activity.name,
+              time: activity.time.toString(),
+              location: activity.location,
+              logo: activity.logo,
+              type: activity.type,
+              club_name: club.name,
+              club_id: activity.club_id,
+              tag: activity.tag,
+            });
+          }
+        })
       }
     });
   });
@@ -158,30 +153,25 @@ module.exports = function(passport) {
   获取社团浏览页面，游客可进
 
   数据请求:
-  1.homepage.jade
+  1.clubHome.jade
   2.req.user
   3.所有的社团的_id,名字,图片,该社团所有活动的总点赞数
   */
   router.get('/club', function(req, res) {
-    Activity.find({}, function(err, activities) {
-      var club_ids = new Array();
-      var names = new Array();
-      var photos = new Array();
-      var counter = 0;
-      for (var i = 0; i < activities.length; i++) {
-        club_ids.push(activities[i].club_id);
-        names.push(activities[i].name);
-        photos.push(activities[i].photos[0]);
-        counter += activities[i].likedPerson.length;
+    Club.find({}, function(err, clubs) {
+      var all_clubs = [];
+      for (var i = 0; i < clubs.length; i++) {
+        var club_info = {};
+        club_info['_id'] = clubs[i]._id;
+        club_info['name'] = clubs[i].name;
+        club_info['logo'] = clubs[i].logo;
+        all_clubs.push(club_info);
       }
       if (err) console.log(err);
       else {
-        res.render('homepage', {
+        res.render('clubHome', {
           user:req.user,
-          club_id: club_ids,
-          names: names,
-          photos: photos,   // 这是一个2维数组   photos本身是一个数组， 它里面的每一个元素也是数组
-          likedNumber: counter
+          content_list:all_clubs
         });
       }
     });
@@ -203,27 +193,10 @@ module.exports = function(passport) {
   router.get('/club/:club_id', function(req, res) {
     // body...
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      var ids = new Array();
-      var names = new Array();
-      var times = new Array();
-      var likedNumber = new Array();
-      for (var i = 0; i < club.activity.length; i++) {
-        ids.push(club.activity[i]._id);
-        names.push(club.activity[i].name);
-        times.push(club.activity[i].time);
-        likedNumber.push(club.activity[i].likedPerson.length);
-      }
       if (err) console.log(err);
       else {
         res.render('clubDetail', {
-          user: req.user,
-          name: club.name,
-          description: club.description,
-          logo: club.logo,
-          activity_id : ids,
-          names: names,
-          time: times,
-          likedNumber: likedNumber
+          club:club
         });
       }
     });
@@ -286,16 +259,18 @@ module.exports = function(passport) {
   */
 
   router.post('/club/:club_id/newevent', function(req, res) {
+    console.log(req.files['logo']);
     var activity = new Activity({
-      name : req.body.name,
-      time : req.body.time,
-      location : req.body.location,
-      type : req.body.type,
-      tag : req.body.tag,
-      photos: [req.body.photo],
-      detal_discription: req.body.detal_discription,
+      name : req.param('newEventName'),
+      time : req.param('newEventTime'),
+      location : req.param('newEventPlace'),
+      type : req.param('newEventType'),
+      tag : req.param('newEventTag'),
+      logo: '/'+req.files['logo'].name,
+      detail_discription: req.param('newEventSummary'),
       club_id: req.params.club_id
     });
+    console.log(activity);
     activity.save(function(err) {
       if (err) console.log(err);
     });
@@ -346,8 +321,6 @@ module.exports = function(passport) {
   3.该社团的_id, 名字, logo
   4.该社团所有活动的_id, 名字, 时间, 点赞数, logo
   */
-
-  // 李健华： 活动没有logo
 
   router.get('/club/:club_id/manageevent', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
@@ -502,7 +475,7 @@ module.exports = function(passport) {
     });
   });
 
-  router.get('/admin', function(req, res) {
+  router.get('/admin', isAuthenticated, function(req, res) {
     res.render('admin', {
       user: req.user,
     })
@@ -521,8 +494,8 @@ module.exports = function(passport) {
       } else {
         var newClub = new Club({
           name: req.param('name'),
-          description: req.param('discription'),
-          logo: '/'+req.files['logo'].path.split('/').slice(2).join('/'),
+          description: req.param('description'),
+          logo: '/'+req.files['logo'].name,
           comment_to_club: [],
           activity: [],
         })
