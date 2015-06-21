@@ -148,7 +148,6 @@ module.exports = function(passport) {
     });
   });
 
-
   /*
   获取社团浏览页面，游客可进
 
@@ -216,15 +215,18 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/clubmanage', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      console.log(club.activitiy)
-      res.render('clubManage', {
-        user: req.user,
-        club_id: club._id,
-        name: club.name,
-        description: club.description,
-        logo: club.logo,
-        content_list: club.activitiy
-      });
+      if (err) console.log(err);
+      else {
+        console.log(club.activity)
+        res.render('clubManage', {
+          user: req.user,
+          club_id: club._id,
+          name: club.name,
+          description: club.description,
+          logo: club.logo,
+          content_list: club.activity
+        });
+      }
     });
   });
 
@@ -372,6 +374,7 @@ module.exports = function(passport) {
       for (var i = 0; i < club.activity.length; i++) {
         if (club.activity[i]._id == req.params.act_id) {
           res.render('specificManageEvent', {
+            user: req.user,
             club_id: club._id,
             club_name: club.name,
             club_logo: club.logo,
@@ -380,7 +383,7 @@ module.exports = function(passport) {
             activity_time : club.activity[i].time,
             activity_type : club.activity[i].type,
             activity_tag : club.activity[i].tag,
-            activity_detail_description: club.activity[i].detal_discription
+            activity_logo : club.activity[i].logo
           });
         }
       }
@@ -417,10 +420,10 @@ module.exports = function(passport) {
     Activity.findOne({_id: req.params.act_id}, function(err, activity) {
       if (err) console.log(err);
       else {
-        activity.name = req.body.name ? req.body.name : activity.name;
-        activity.time = req.body.time ? req.body.time : activity.time;
-        activity.type = req.body.type ? req.body.type : activity.type;
-        activity.tag = req.body.tag ? req.body.tag : activity.tag;
+        activity.name = req.body.name
+        activity.time = req.body.time
+        activity.type = req.body.type
+        activity.tag = req.body.tag
         activity.photos[0] = req.body.photos[0] ? req.body.photos[0] : activity.photos[0];
         activity.detal_discription = req.body.detal_discription ? req.body.detal_discription : activity.detal_discription;
       }

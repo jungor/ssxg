@@ -15,6 +15,7 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/newEvent.css')
     script(src='/javascripts/jquery-1.11.2.js')
     script(src='/javascripts/semantic.js')
+    script(src='/javascripts/specificManageEvent.js')
   body#home
     .following.bar.light.fixed
       .insideTopBar
@@ -58,35 +59,39 @@ html
               .row
                 .right.floated.six.wide.column
                   p 更换海报
-                  img.ui.massive.bordered.image(src='')
-                  input#updateImg(type='file', name='uploadFile')
+                  img.ui.massive.bordered.image(src='#{activity_logo}')
+                  form#newEvent(action='/club/#{club_id}/#{activity_id}/specificmanageevent', method='post', enctype="multipart/form-data")
+                    input#updateImg(type='file', name='uploadFile')
+                    input#newEventName(required='required', type='text', name='newEventName', hidden='')
+                    input#newEventTime(required='required', type='date', name='newEventTime', hidden='')
+                    input#newEventType(required='required', type='text', name='newEventType', hidden='')
+                    input#newEventTag(required='required', type='text', name='newEventTag', hidden='')
                 .ten.wide.column
                   #form_content.fr-widget.fr-grid.fr_content
                     #newLeftColumn1.column
                       .ui.form.segment
-                        form.loginForm(action='/login', method='post')
+                        form.loginForm()
                           .field
                             label 修改名称
                             .ui.left.icon.input
-                              input(required='required', type='text', name='newEventName')
+                              input#eventName(required='required', type='text', name='newEventName', value='#{activity_name}')
                           .field
                             label 修改时间
                             .ui.left.icon.input
-                              input(required='required', type='text', name='newEventTime')
+                              input#eventTime(required='required', type='text', name='newEventTime', value='#{activity_time}')
                           .field
                           .field
                             label 修改类型
                             .ui.left.icon.input
-                              input(required='required', type='text', name='newEventType')
+                              input#eventType(required='required', type='text', name='newEventType', value='#{activity_type}')
                           .field
                             label 修改标签
                             .ui.left.icon.input
-                              input(required='required', type='text', name='newEventTag')
+                              input#eventTag(required='required', type='text', name='newEventTag', value='#{activity_tag}')
                 .row
                   .ui.inverted.section.divider
                   h4.ui.header
-                    | 修改具体描述
-                    h3.ui.header 文本编辑器
+                    | 选择替换海报
                 .ui.inverted.section.divider
                 .row
                   #button.ui.basic.animated.button.button
@@ -97,9 +102,9 @@ html
             .ui.animated.selection.list
               .ui.fluid.card
                 .image
-                  img(src='/images/jenny.jpg')
+                  img(src="#{club_logo}")
                 .content
-                  a.header(href='./clubManager.html') 不想写作业社
+                  a.header(href='./clubManager.html') #{club_name}
               .ui.section.divider
               .item
                 a(href='./newEvent.html') 发布新活动
