@@ -58,6 +58,21 @@ html
             .ui.piled.segment
               h2 #{name}
               p #{description}
+            //- .activityList
+            //-   .artList.ui.link.cards
+            //-     each item in content_list
+            //-       .ui.card
+            //-         .image
+            //-           img(src="#{item['logo']}")
+            //-         .content
+            //-           a.header(href="/activity/#{item['_id']}") #{item['name']}
+            //-           .meta
+            //-             span.date #{item['time']}
+            //-         .extra.content
+            //-           a
+            //-             i.thumbs.up.icon
+            //-             span 点赞 
+            //-             span 10
           .right.floated.four.wide.column
             .ui.animated.selection.list
               .ui.fluid.card

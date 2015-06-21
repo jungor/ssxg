@@ -28,3 +28,7 @@ node_modules
 
 #Builded files
 bin
+
+
+#upload files
+uploads

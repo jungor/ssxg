@@ -15,6 +15,7 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/modifyClubData.css')
     script(src='/javascripts/jquery-1.11.2.js')
     script(src='/javascripts/semantic.js')
+    script(src='/javascripts/modifyClubData.js')
   body#home
     .following.bar.light.fixed
       .insideTopBar
@@ -51,7 +52,7 @@ html
       .clubManger
         .ui.grid
           .left.floated.twelve.wide.column
-            #modifyLeft.ui.page.grid.stackable.relaxed.feature.segment
+            form#modifyLeft.ui.page.grid.stackable.relaxed.feature.segment(action='/club/#{club_id}/modifyclubdata', method='post', enctype="multipart/form-data")
               .row
                 .column
                   h1.center.aligned.ui.header
@@ -74,12 +75,13 @@ html
                   | 社团描述
                 .ui.two.column.middle.aligned.relaxed.fitted.stackable.grid
                   .field
-                    textarea(cols='70', rows='20')
+                    textarea(name='description', cols='70', rows='20', value='#{description}')
               .ui.inverted.section.divider
               .row
                 #button.ui.basic.animated.button.button
                   .visible.content 确认修改
-                  .hidden.content ->
+                  .hidden.content
+                    i.right.arrow.icon
           .right.floated.four.wide.column
             .ui.animated.selection.list
               .ui.fluid.card

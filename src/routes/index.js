@@ -216,12 +216,14 @@ module.exports = function(passport) {
   */
   router.get('/club/:club_id/clubmanage', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
+      console.log(club.activitiy)
       res.render('clubManage', {
         user: req.user,
         club_id: club._id,
         name: club.name,
         description: club.description,
-        logo: club.logo
+        logo: club.logo,
+        content_list: club.activitiy
       });
     });
   });
@@ -275,6 +277,7 @@ module.exports = function(passport) {
       if (err) console.log(err);
     });
     Club.findOne({_id: req.params.club_id}, function(err, club) {
+      console.log(club.activity)
       club.activity.push(activity);
       club.save(function(err) {
         if (err) console.log(err);
@@ -448,7 +451,8 @@ module.exports = function(passport) {
         user: req.user,
         club_id: club._id,
         name: club.name,
-        logo: club.logo
+        logo: club.logo,
+        description: club.description,
       });
     });
   });
@@ -464,12 +468,12 @@ module.exports = function(passport) {
   */
   router.post('/club/:club_id/modifyclubdata', function(req, res) {
     Club.findOne({_id: req.params.club_id}, function(err, club) {
-      club.logo = req.body.log ? req.body.logo : club.logo;
+      club.logo = req.files['logo'] ? ('/'+req.files['logo'].name) : club.logo;
       club.description = req.body.description ? req.body.description : club.description;
       club.save(function(err) {
         if (err) console.log(err);
         else {
-          res.send("success!!!");
+          res.redirect('/club/'+req.params.club_id+'/clubmanage')
         }
       });
     });
